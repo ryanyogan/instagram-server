@@ -1,6 +1,6 @@
 defmodule InstagramWeb.Resolvers.Accounts do
   alias InstagramWeb.{Authentication, Auth}
-  
+
   def login(_, %{token: token, provider: provider}, _) do
     case provider do
       :facebook ->
@@ -11,5 +11,4 @@ defmodule InstagramWeb.Resolvers.Accounts do
         {:ok, %{token: token}}
     end
   end
-
 end

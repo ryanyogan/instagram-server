@@ -3,9 +3,9 @@ defmodule InstagramWeb.Oauth.Facebook do
 
   def get_info(token) do
     token
-    |> get_user
-    |> get_user_profile_picture("small", token)
-    |> nomralize_return_data
+    |> get_user # user
+    |> get_user_profile_picture("small", token) # [user, picture_data]
+    |> normalize
   end
 
   defp get_user(token) do
@@ -18,13 +18,13 @@ defmodule InstagramWeb.Oauth.Facebook do
     [user, data]
   end
 
-  defp nomralize_return_data([user, picture_data]) do
+  defp normalize([user, picture_data]) do
     %{
       facebook_id: user["id"],
       avatar: picture_data["data"]["url"],
       first_name: user["first_name"],
       last_name: user["last_name"],
-      email: user["email"]
+      email: "fixme@example.com"
     }
   end
 end
