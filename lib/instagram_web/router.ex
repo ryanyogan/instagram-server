@@ -3,6 +3,7 @@ defmodule InstagramWeb.Router do
 
   pipeline :api do
     plug :accepts, ["json"]
+    plug InstagramWeb.Context # IM -> OAuth2 Proto
   end
 
   scope "/api" do
