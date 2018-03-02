@@ -12,6 +12,7 @@ defmodule Instagram.Accounts do
     case Repo.get_by(User, Map.to_list(search_params)) do
       nil ->
         create_user(attrs)
+
       user ->
         {:ok, user}
     end

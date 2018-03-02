@@ -8,7 +8,7 @@ defmodule InstagramWeb.Context do
 
   def call(conn, _) do
     context = build_context(conn)
-    IO.inspect [context: context]
+    IO.inspect(context: context)
     put_private(conn, :absinthe, %{context: context})
   end
 
@@ -17,15 +17,16 @@ defmodule InstagramWeb.Context do
   # end
   defp build_context(conn) do
     with ["Bearer " <> token] <- get_req_header(conn, "authorization"),
-      {:ok, current_user} <- authorize(token) do
-        %{current_user: current_user}
-      else
-        nil ->
-          {:error, "Unauthorized"}
-        _ ->
-          %{}
-      end
+         {:ok, current_user} <- authorize(token) do
+      %{current_user: current_user}
+    else
+      nil ->
+        {:error, "Unauthorized"}
+
+      _ ->
+        %{}
     end
+  end
 
   defp authorize(token) do
     case Auth.Guardian.decode_and_verify(token) do
@@ -34,5 +35,4 @@ defmodule InstagramWeb.Context do
       nil -> {:error, "Unauthorized"}
     end
   end
-
 end

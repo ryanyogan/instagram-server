@@ -3,10 +3,11 @@ defmodule Instagram.Posts.Photo do
   import Ecto.Changeset
   alias Instagram.Posts.Photo
 
-
   schema "photos" do
-    field :caption, :string
-    field :image_url, :string
+    field(:caption, :string)
+    field(:image_url, :string)
+
+    has_many(:likes, Instagram.Reactions.LikePhoto)
 
     timestamps()
   end

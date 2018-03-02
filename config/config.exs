@@ -6,16 +6,14 @@
 use Mix.Config
 
 # General application configuration
-config :instagram,
-  ecto_repos: [Instagram.Repo]
+config :instagram, ecto_repos: [Instagram.Repo]
 
 # Configures the endpoint
 config :instagram, InstagramWeb.Endpoint,
   url: [host: "localhost"],
   secret_key_base: "CbmcIFCrjnrZaQHRTOVuYqC0QbfIu7eHKjEwxaXNH7d+SiEuc5bd4CROfGjw9X9I",
   render_errors: [view: InstagramWeb.ErrorView, accepts: ~w(json)],
-  pubsub: [name: Instagram.PubSub,
-           adapter: Phoenix.PubSub.PG2]
+  pubsub: [name: Instagram.PubSub, adapter: Phoenix.PubSub.PG2]
 
 # Configures Elixir's Logger
 config :logger, :console,
@@ -30,4 +28,4 @@ config :instagram, InstagramWeb.Auth.Guardian,
 
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
-import_config "#{Mix.env}.exs"
+import_config "#{Mix.env()}.exs"

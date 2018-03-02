@@ -3,14 +3,15 @@ defmodule Instagram.Accounts.User do
   import Ecto.Changeset
   alias Instagram.Accounts.User
 
-
   schema "users" do
-    field :avatar, :string
-    field :email, :string
-    field :facebook_id, :string
-    field :first_name, :string
-    field :last_name, :string
-    field :username, :string
+    field(:avatar, :string)
+    field(:email, :string)
+    field(:facebook_id, :string)
+    field(:first_name, :string)
+    field(:last_name, :string)
+    field(:username, :string)
+
+    has_many(:like_photos, Instagram.Reactions.LikePhoto)
 
     timestamps()
   end

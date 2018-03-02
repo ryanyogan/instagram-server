@@ -9,5 +9,4 @@ defmodule InstagramWeb.Authentication do
 
     Accounts.get_user_or_create(attrs, search_params)
   end
-
 end
