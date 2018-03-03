@@ -3,9 +3,7 @@ defmodule InstagramWeb.Oauth.Facebook do
 
   def get_info(token) do
     token
-    # user
     |> get_user
-    # [user, picture_data]
     |> get_user_profile_picture("small", token)
     |> normalize
   end
