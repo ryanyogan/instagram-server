@@ -1,6 +1,9 @@
-alias Instagram.{Posts, Repo}
+import Integer, only: [is_odd: 1]
+
+alias Instagram.{Posts, Repo, Accounts}
 
 mock_photos = 9
+mock_users = 5
 
 photos_list = [
   "https://freestocks.org/fs/wp-content/uploads/2018/01/english_bulldog_lying_on_a_sofa_2-800x533.jpg",
@@ -15,13 +18,31 @@ photos_list = [
   "https://freestocks.org/fs/wp-content/uploads/2016/08/timber-800x533.jpg"
 ]
 
+# Users
+for idx <- 1..mock_users do
+  sex = if is_odd(idx), do: "men", else: "women"
+  avatar = "https://randomuser.me/api/portrait/#{sex}/#{idx}.jpg"
+
+  %Accounts.User{
+    email: Faker.Internet.email(),
+    avatar: avatar,
+    username: Faker.Internet.user_name(),
+    first_name: Faker.Name.first_name(),
+    last_name: Faker.Name.last_name(),
+    facebook_id: "#{idx}"
+  }
+  |> Repo.insert!()
+end
+
+# Photos
 for idx <- 0..mock_photos do
   photo = %{
     image_url: Enum.at(photos_list, idx),
-    caption: Faker.Lorem.Shakespeare.hamlet
+    caption: Faker.Lorem.Shakespeare.hamlet(),
+    user_id: Enum.random(1..mock_users)
   }
 
   %Posts.Photo{}
   |> Posts.Photo.changeset(photo)
-  |> Repo.insert!
+  |> Repo.insert!()
 end

@@ -26,6 +26,15 @@ config :instagram, InstagramWeb.Auth.Guardian,
   verify_issuer: true,
   secret_key: "FotAEjXvVW5SiRuPVOnxvfqhdSM/Z2QyTeRBYQJfmVX07QP3uQU8I+3gyc6pQ9F+"
 
+config :ex_aws,
+  access_key_id: System.get_env("AWS_ACCESS_KEY_ID"),
+  secret_access_key: System.get_env("AWS_SECRET_ACCESS_KEY"),
+  s3: [
+    schema: "https://",
+    host: "doggy-duty.s3.amazonaws.com",
+    region: "us-east-1"
+  ]
+
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
 import_config "#{Mix.env()}.exs"
